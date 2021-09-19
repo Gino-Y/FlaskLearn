@@ -39,58 +39,60 @@ return "json格式的字符串",200,{"content-type":"application/json"}
 
 """
 
-from flask import Flask,request
+from flask import Flask, request
 import tokenUtil
+
 app = Flask(__name__)
 
 # {"parkId":"1","status":"空闲"}
 #
 parkDict = {
-    "1":"空闲",
-    "2":"空闲",
-    "3":"空闲"
+    "1": "空闲",
+    "2": "空闲",
+    "3": "空闲"
 }
-userDict = {
-    "zs":"123456",
-    "ls":"123456"
-}
-
-
 # {"username":"张三","password":"xxx"}
+userDict = {
+    "zs": "123456",
+    "ls": "123456"
+}
+
+
 # {"token":"xxxx","refreshToken":"用来作废旧token换新token的凭证"}
-@app.route("/getToken",methods=["POST"])
+@app.route("/getToken", methods=["POST"])
 def getToken():
     username = request.json.get("username")
     password = request.json.get("password")
     token = tokenUtil.genToken(username)
-    if(userDict[username]==password):
-        return '{"code":0,"msg":"success","token":"'+token+'"}', \
+    if (userDict[username] == password):
+        return '{"code":0,"msg":"success","token":"' + token + '"}', \
                200, {"content-type": "application/json"}
     else:
         return '{"code":1,"msg":"用户名或密码错误"}'
 
-@app.route("/setInfo",methods=["POST"])
+
+@app.route("/setInfo", methods=["POST"])
 def setInfo():
     token = request.json.get("token")
     # 验证token是否正确
     if not tokenUtil.validateToken(token):
-        return '{"code":1,"msg":"token is invalid"}',200,{"content-type":"application/json"}
+        return '{"code":1,"msg":"token is invalid"}', 200, {"content-type": "application/json"}
 
     parkId = request.json.get("parkId")
     parkStaus = request.json.get("status")
     parkDict[parkId] = parkStaus
     print(parkDict)
-    return '{"code":0,"msg":"success"}',200,{"content-type":"application/json"}
+    return '{"code":0,"msg":"success"}', 200, {"content-type": "application/json"}
 
 
 # /getInfo?id=?
 # {"status":"空闲"}
-@app.route("/getInfo",methods=["GET"])
+@app.route("/getInfo", methods=["GET"])
 def getInfo():
     print(parkDict)
     parkId = request.args.get("id")
     parkStaus = parkDict[parkId]
-    return '{"status":"'+parkStaus+'"}',200,{"content-type":"application/json"}
+    return '{"status":"' + parkStaus + '"}', 200, {"content-type": "application/json"}
 
 
 # 1. 路径参数
