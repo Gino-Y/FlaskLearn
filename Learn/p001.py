@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.route('/t1/<p1>/<p2>')
-def m001(p1,p2):
+def m001(p1, p2):
     return p1 + "/" + p2
 
 
