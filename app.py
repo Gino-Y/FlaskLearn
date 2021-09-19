@@ -1,9 +1,7 @@
 from flask import Flask, request
 import config
-import talib
 
-print(talib.__file__)
-exit()
+
 # 创建一个flask对象
 app = Flask(__name__)
 app.config.from_object(config)
