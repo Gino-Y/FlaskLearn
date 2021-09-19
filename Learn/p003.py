@@ -1,4 +1,4 @@
-from flask import Flask,request
+from flask import Flask, request
 app = Flask(__name__)
 
 @app.route("/p1",methods=["GET","POST"])

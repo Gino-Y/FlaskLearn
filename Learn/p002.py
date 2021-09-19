@@ -6,11 +6,14 @@ from werkzeug.routing import BaseConverter
 
 app = Flask(__name__)
 
+
 # 自定义类型转换器
 class MobileConverter(BaseConverter):
     regex = "1[3-9]\d{9}$"  # 匹配规则，不要以^开头
 
+
 app.url_map.converters["mobile"] = MobileConverter  # 添加到转换器列表
+
 
 @app.route(rule="/user/<mobile:mobile>")  # 将参数uid转换成mobile类型
 def index(mobile):
@@ -26,8 +29,11 @@ class MyRegexConverter(BaseConverter):
         super(MyRegexConverter, self).__init__(map)
         self.regex = regex
 
+
 # 4.将转换器类，添加到系统默认的转换器列表中
 app.url_map.converters['wdc'] = MyRegexConverter
+
+
 # 三位整数
 @app.route('/<wdc("\d{3}"):num>')
 def hello_world(num):
@@ -43,7 +49,7 @@ class ListConverter(BaseConverter):
         # split方法就是去掉加号并返回list类型数据
         tmp = values.split('+')
         return tmp
-    
+
     def to_url(self, values):
         """
         将[1,2,3]转换成1+2+3
@@ -53,14 +59,16 @@ class ListConverter(BaseConverter):
         tmp1 = '+'.join(values)
         return tmp1
 
+
 # 将写好的类注册到DEFAULT_CONVERTERS
 app.url_map.converters['list'] = ListConverter
+
+
 @app.route('/detail/<list:params>/')
 def detail(params):
-    print('params:%s' % params)    
+    print('params:%s' % params)
     return 'success for url'
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
