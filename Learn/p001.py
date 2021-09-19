@@ -8,9 +8,9 @@ def m001(p1, p2):
     return p1 + "/" + p2
 
 
-@app.route('/t2/<int:p1>/')
-def m002(p1):
-    return str( type(p1) )
+@app.route('/t2/<int:p2>/')
+def m002(p2):
+    return str( type(p2) )
 
 @app.route('/t3/<path:p1>/')
 def m003(p1):
