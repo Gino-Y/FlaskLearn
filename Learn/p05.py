@@ -51,6 +51,7 @@ parkDict = {
     "2": "空闲",
     "3": "空闲"
 }
+
 # {"username":"张三","password":"xxx"}
 userDict = {
     "zs": "123456",
