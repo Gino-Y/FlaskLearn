@@ -1,5 +1,5 @@
 from wtforms import Form, StringField
-from wtforms.validators import Length, EqualTo, Email
+from wtforms.validators import Length, EqualTo, Email, DataRequired
 
 
 class RegistForm(Form):
@@ -8,7 +8,7 @@ class RegistForm(Form):
     password = StringField(validators=[Length(min=3, max=10,
                                               message='用户名长度必须在3到10位之间')])
     password_repeat = StringField(validators=[Length(min=3, max=10,
-                                              message='两次密码输入不一致'), EqualTo('password')])
+                                                     message='两次密码输入不一致'), EqualTo('password')])
 
 
 class LoginForm(Form):
