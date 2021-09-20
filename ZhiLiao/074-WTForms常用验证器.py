@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def hello_world():
 @app.route('/regist/', methods=['GET', 'POST'])
 def regist():
     if request.method == 'get':
-        pass
+        return render_template(r'D:\Works\FlaskLearn\ZhiLiao\templates\regist.html')
     else:
         pass
 
