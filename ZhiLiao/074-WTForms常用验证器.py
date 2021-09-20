@@ -8,7 +8,7 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/regist/', methods=['GET'])
+@app.route('/regist/', methods=['GET', 'POST'])
 def regist():
     if request.method == 'get':
         pass
