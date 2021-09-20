@@ -22,8 +22,8 @@ def hello_world():
 
 @app.route('/regist/', methods=['GET', 'POST'])
 def regist():
-    if request.method == 'get':
-        return render_template(r'WangYiYun/templates/regist.html')
+    if request.method == 'GET':
+        return render_template('regist.html')
     else:
         form = RegistForm(request.form)
         if form.validate():
