@@ -1,8 +1,9 @@
+from flask import Flask, request, make_response, session, redirect
 
-from flask import Flask,request,make_response,session,redirect
 app = Flask(__name__)
 
-app.config["SECRET_KEY"]="123"
+app.config["SECRET_KEY"] = "123"
+
 
 #  A系统 把token值发给登陆校验系统进行校验
 #  B系统
@@ -23,29 +24,31 @@ app.config["SECRET_KEY"]="123"
 # 浏览用新的 accessToken 访问业务系统
 #
 
-@app.route("/login",methods=["GET","POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     resp = make_response("LOGIN SUCCESS")
     session["username"] = request.args.get("username")
     return resp
 
-@app.route("/main",methods=["GET","POST"])
+
+@app.route("/main", methods=["GET", "POST"])
 def amin():
     if "username" not in session:
-        #return redirect("http://127.0.0.1:5000/login.html")
+        # return redirect("http://127.0.0.1:5000/login.html")
         return '{"code":3}'
     else:
-        return "WELCOME,"+session["username"]
+        return "WELCOME," + session["username"]
 
 
-@app.route("/getCookie/aaa/bbb/ccc",methods=["GET","POST"])
+@app.route("/getCookie/aaa/bbb/ccc", methods=["GET", "POST"])
 def getToken():
     resp = make_response("SUCCESS")
-    resp.set_cookie("sessionId","001",path="/getInfo/")
-    resp.set_cookie("cookie004","bbbb",max_age=10)
+    resp.set_cookie("sessionId", "001", path="/getInfo/")
+    resp.set_cookie("cookie004", "bbbb", max_age=10)
     return resp
 
-@app.route("/getInfo/aaa/b",methods=["GET"])
+
+@app.route("/getInfo/aaa/b", methods=["GET"])
 def getInfo():
     return request.cookies.get("cookie005")
 
