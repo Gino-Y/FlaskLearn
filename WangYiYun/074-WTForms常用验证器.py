@@ -11,7 +11,7 @@ def hello_world():
 @app.route('/regist/', methods=['GET', 'POST'])
 def regist():
     if request.method == 'get':
-        return render_template(r'D:\Works\FlaskLearn\ZhiLiao\templates\regist.html')
+        return render_template(r'WangYiYun/templates/regist.html')
     else:
         pass
 
