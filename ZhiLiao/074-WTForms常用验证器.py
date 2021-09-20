@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def hello_world():
 
 @app.route('/regist/', methods=['GET'])
 def regist():
-    if regist.method == 'get':
+    if request.method == 'get':
         pass
     else:
         pass
